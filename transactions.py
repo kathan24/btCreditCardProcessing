@@ -3,25 +3,10 @@ import os, sys
 from user import User
 import fileinput
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
-argument = sys.argv
-transactions = []
 
-if len(argument) > 1:
-    file_path = sys.argv
+def process_transactions(transactions):
+    user_accounts = {}
 
-    input_file = open(dir_path + '/' + file_path[1], 'r')
-    transactions = input_file.read()
-    input_file.close()
-
-    transactions = transactions.split('\n')
-else:
-    for line in fileinput.input():
-        transactions.append(line)
-
-user_accounts = {}
-
-def process_transactions():
     for transaction in transactions:
         user_account = transaction.split(' ')
 
@@ -41,7 +26,6 @@ def process_transactions():
             if user.card.is_valid:
                 user.card.balance -= credit
 
-def print_summary():
     for key in sorted(user_accounts):
         if user_accounts[key].card.is_valid:
             print "{0}: ${1}".format(user_accounts[key].name, user_accounts[key].card.balance)
@@ -50,12 +34,28 @@ def print_summary():
 
 
 if __name__ == "__main__":
-    process_transactions()
-    print_summary()
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    argument = sys.argv
+    transactions = []
+
+    if len(argument) > 1:
+        file_path = sys.argv
+
+        input_file = open(dir_path + '/' + file_path[1], 'r')
+        transactions = input_file.read()
+        input_file.close()
+
+        transactions = transactions.split('\n')
+    else:
+        for line in fileinput.input():
+            transactions.append(line)
+
+    if transactions:
+        process_transactions(transactions)
 
 
 """ questions
-1. can one user have multilple cards ?
+1. can one user have multiple cards ?
 2. what if the total charge is less than limit but increasing the charge it increases the total charge more than limit. is it valid ?
 like
 Add Tom 4111111111111111 $1000
