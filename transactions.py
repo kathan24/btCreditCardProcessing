@@ -6,6 +6,7 @@ import fileinput
 
 def process_transactions(transactions):
     user_accounts = {}
+    summary = []
 
     for transaction in transactions:
         user_account = transaction.split(' ')
@@ -28,10 +29,11 @@ def process_transactions(transactions):
 
     for key in sorted(user_accounts):
         if user_accounts[key].card.is_valid:
-            print "{0}: ${1}".format(user_accounts[key].name, user_accounts[key].card.balance)
+            summary.append("{0}: ${1}".format(user_accounts[key].name, user_accounts[key].card.balance))
         else:
-            print "{0}: error".format(user_accounts[key].name)
+            summary.append("{0}: error".format(user_accounts[key].name))
 
+    return summary
 
 if __name__ == "__main__":
     dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -51,8 +53,9 @@ if __name__ == "__main__":
             transactions.append(line)
 
     if transactions:
-        process_transactions(transactions)
-
+        summary = process_transactions(transactions)
+        for user_summary in summary:
+            print user_summary
 
 """ questions
 1. can one user have multiple cards ?
