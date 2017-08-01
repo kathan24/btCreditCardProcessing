@@ -1,6 +1,9 @@
 Add Tom 4111111111111111 $1000
 Add Lisa 5454545454545454 $3000
+Add Quincy 9876678998766789 $5000
+Charge Quincy $5000
+Credit Quincy $50
+Charge Tom $501
 Charge Tom $500
 Credit Lisa $100
-Charge Tom $300
-Credit Tom $200
+

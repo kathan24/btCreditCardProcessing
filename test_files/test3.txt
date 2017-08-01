@@ -1,3 +1,5 @@
+Charge Tom $500
+Credit Lisa $100
 Add Tom 4111111111111111 $1000
 Add Lisa 5454545454545454 $3000
 Charge Tom $500
